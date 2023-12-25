@@ -1,4 +1,4 @@
-const { handleRequest } = require('./../config/requestHandler');
+const { handleRequest } = require('../utils/requestHandler');
 
 const router = app => {
 

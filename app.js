@@ -2,19 +2,22 @@ const express = require("express");
 const logger = require("morgan");
 const compression = require("compression");
 const bodyParser = require("body-parser");
-const jwt = require("jsonwebtoken");
 const cors = require("cors");
 const mongoose = require("./config/database");
 const router = require('./router/router');
+const verifyJwt = require('./middlewares/verifyJwt');
+const companyModel = require('./models/company');
+const init = require('./utils/init');
 
-const { response } = require("./config/response");
+
 const { createServer } = require("http");
 const { Server } = require("socket.io");
-const { handleRequest } = require('./config/requestHandler');
 
 require("dotenv").config();
 
 const port = 421;
+
+const company = require("./company/company.router");
 
 const app = express();
 const httpServer = createServer(app);
@@ -39,6 +42,11 @@ app.use(bodyParser.json());
 app.use("/uploads", express.static(process.cwd() + "/uploads"));
 app.use(express.static(process.cwd() + "/simkrs_api/"));
 
+app.use("/company", company);
+
+function validateUser(req, res, next) {
+    verifyJwt(req, res, next);
+}
 
 mongoose.connection.on(
     "error",
@@ -50,17 +58,14 @@ app.get("/favicon.ico", function (req, res) {
 });
 
 router(app);
+require('./utils/socket')(io);
 
-
-
-io.on("connection", (socket) => {
-    io.emit("test event", "DATABASE CONNECTED!!");
-
-    socket.on("addKeranjang", function (data) {
-        io.emit("keranjang", data);
+init().then(() => {
+    httpServer.listen(port, () => {
+        console.log(`simaya api listening on port ${port}`);
     });
+}).catch(err => {
+    console.log(err);
 });
 
-httpServer.listen(port, () => {
-    console.log(`simaya api listening on port ${port}`);
-});
+
