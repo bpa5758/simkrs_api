@@ -1,13 +1,13 @@
-const companyModel = require('./../models/company');
+const About = require('../models/about');
 
 module.exports = async function () {
 
-    const companyCount = await companyModel.countDocuments();
+    const aboutCount = await About.countDocuments();
 
-    if (companyCount === 0) {
-        const user = new companyModel({
-            nama: 'RS BHAYANGKARA POLDA ACEH',
-            alias: 'RSBPA',
+    if (aboutCount === 0) {
+        const user = new About({
+            nama: 'SISTEM INFORMASI MANAJEMEN KLINIK & RS',
+            alias: 'SIMKRS',
         });
 
         await user.save();

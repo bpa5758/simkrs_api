@@ -6,7 +6,6 @@ const cors = require("cors");
 const mongoose = require("./config/database");
 const router = require('./router/router');
 const verifyJwt = require('./middlewares/verifyJwt');
-const companyModel = require('./models/company');
 const init = require('./utils/init');
 
 
@@ -17,7 +16,7 @@ require("dotenv").config();
 
 const port = 421;
 
-const company = require("./company/company.router");
+const about = require("./simkrs/about/about.router");
 
 const app = express();
 const httpServer = createServer(app);
@@ -42,7 +41,7 @@ app.use(bodyParser.json());
 app.use("/uploads", express.static(process.cwd() + "/uploads"));
 app.use(express.static(process.cwd() + "/simkrs_api/"));
 
-app.use("/company", company);
+app.use("/about", about);
 
 function validateUser(req, res, next) {
     verifyJwt(req, res, next);
@@ -62,10 +61,12 @@ require('./utils/socket')(io);
 
 init().then(() => {
     httpServer.listen(port, () => {
-        console.log(`simaya api listening on port ${port}`);
+        console.log(`simkrs api listening on port ${port}`);
     });
 }).catch(err => {
     console.log(err);
 });
+
+
 
 

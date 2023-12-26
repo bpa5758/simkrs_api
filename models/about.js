@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const moment = require("moment");
 
-const CompanySchema = new Schema({
+const AboutSchema = new Schema({
     nama: {
         type: String,
         trim: true,
@@ -33,4 +33,4 @@ const CompanySchema = new Schema({
     },
 });
 
-module.exports = mongoose.model("Company", CompanySchema);
+module.exports = mongoose.model("About", AboutSchema);

@@ -1,5 +1,5 @@
-const { response } = require("../utils/response");
-const companyModel = require("../models/company");
+const { response } = require("../../utils/response");
+const companyModel = require("../../models/about");
 
 module.exports = {
     getCompanyData: async (req, res) => {
