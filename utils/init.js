@@ -6,8 +6,10 @@ module.exports = async function () {
 
     if (aboutCount === 0) {
         const user = new About({
-            nama: 'SISTEM INFORMASI MANAJEMEN KLINIK & RS',
-            alias: 'SIMKRS',
+            nama: 'RS BHAYANGKARA POLDA NAD',
+            alias: 'SIMRS',
+            keterangan: 'SISTEM INFORMASI MANAJEMEN RS',
+            img: '1.png',
         });
 
         await user.save();

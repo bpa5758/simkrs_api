@@ -23,6 +23,14 @@ const AboutSchema = new Schema({
         type: String,
         trim: true,
     },
+    keterangan: {
+        type: String,
+        trim: true,
+    },
+    img: {
+        type: String,
+        trim: true,
+    },
     createdAt: {
         type: String,
         default: moment().format("YYYY-MM-DD HH:mm:ss"),
