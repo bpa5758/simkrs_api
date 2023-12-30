@@ -2,7 +2,7 @@ const { response } = require("../../utils/response");
 const companyModel = require("../../models/about");
 
 module.exports = {
-    getCompanyData: async (req, res) => {
+    getAboutData: async (req, res) => {
         try {
             const data = await companyModel.findOne();
             return response(200, "Ok", data, res);
